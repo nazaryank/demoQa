@@ -1,8 +1,4 @@
 import { test, expect, request } from "@playwright/test";
-import { beforeEach } from "node:test";
-import { json } from "stream/consumers";
-
-test.beforeEach(async ({ page }) => {});
 
 test("Login via api", async ({ browser }) => {
   const apiContext = await request.newContext();
