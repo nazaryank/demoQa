@@ -18,7 +18,8 @@ export class MainPage {
   }
 
   async navigateTo(pageLink: string, pageHeader: string) {
-    await this.page.goto(pageLink);
-    await expect(pageHeader).toContain(pageHeader);
+    await this.page.goto(pageLink, { waitUntil: "domcontentloaded" });
+
+    await expect(this.page.locator("h1")).toContainText(pageHeader);
   }
 }
