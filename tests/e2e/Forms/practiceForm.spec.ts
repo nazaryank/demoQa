@@ -1,20 +1,17 @@
-import { test, Page } from "@playwright/test";
+import { test } from "@playwright/test";
+import { PracticeFormPage } from "../../../page-objects/Forms/practiceFormPage";
 import { MainPage } from "../../../page-objects/MainPage";
 import { loginAndGetToken } from "../../utils/apiHelper";
-import { PracticeFormPage } from "../../../page-objects/Forms/practiceFormPage";
 
 test.beforeEach(async ({ page }) => {
   const mainPage = new MainPage({ page });
   await loginAndGetToken;
-  mainPage.navigateTo(
-    "https://demoqa.com/automation-practice-form",
-    "Practice Form"
-  );
+  await mainPage.navigateTo("https://demoqa.com/automation-practice-form", "");
 });
 
 test("Verify appearance of Practice Form page", async ({ page }) => {
   const practiceFormPage = new PracticeFormPage({ page });
-  practiceFormPage.verifyPageAppearance();
+  await practiceFormPage.verifyPageAppearance();
 });
 
 test("Fill in form with valide values", async ({ page }) => {
@@ -27,5 +24,13 @@ test("Fill in form with valide values", async ({ page }) => {
 
   const practiceFormPage = new PracticeFormPage({ page });
 
-  practiceFormPage.fillInTheField(firstName);
+  await practiceFormPage.fillInTheField(
+    firstName,
+    lastName,
+    email,
+    mobileNumber,
+    currentAddress
+  );
+
+  await practiceFormPage.selectDate();
 });
